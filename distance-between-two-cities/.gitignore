@@ -1,0 +1,5 @@
+# Ignore the api key file
+api.ini
+
+# Ignore IDE related files and folders
+.idea
