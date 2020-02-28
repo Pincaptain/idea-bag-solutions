@@ -3,7 +3,6 @@ import sys
 from use_cases.get_city_coordinates import get_city_coordinates
 from use_cases.calculate_distance import calculate_distance
 
-
 if __name__ == '__main__':
     x = None
     y = None
