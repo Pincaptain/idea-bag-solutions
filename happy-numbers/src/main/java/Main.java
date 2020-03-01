@@ -1,9 +1,10 @@
 import services.HappyNumberService;
+import services.IHappyNumberService;
 
 import java.util.List;
 
 public class Main {
-    public static HappyNumberService happyNumberService = new HappyNumberService();
+    public static IHappyNumberService happyNumberService = new HappyNumberService();
 
     public static void main(String[] args) {
         if (args.length != 1) {

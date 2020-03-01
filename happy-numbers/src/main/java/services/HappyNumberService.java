@@ -1,10 +1,13 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class HappyNumberService {
+public class HappyNumberService implements IHappyNumberService {
+    @Override
     public List<Integer> getHappyNumbers(int offset, final int limit) {
         ArrayList<Integer> happyNumbers = new ArrayList<>();
 
@@ -23,34 +26,29 @@ public class HappyNumberService {
         return happyNumbers;
     }
 
-    public boolean isHappyNumber(int number) {
-        int temporary = number;
+    private boolean isHappyNumber(int number) {
         HashSet<Integer> seenNumbers = new HashSet<>();
 
         while (true) {
-            temporary = getSquaredDigitSum(temporary);
+            number = getSquaredDigitSum(number);
 
-            if (temporary == 1) {
+            if (number == 1) {
                 return true;
-            } else if (seenNumbers.contains(temporary)) {
+            } else if (seenNumbers.contains(number)) {
                 return false;
             }
 
-            seenNumbers.add(temporary);
+            seenNumbers.add(number);
         }
     }
 
     private int getSquaredDigitSum(int number) {
-        char[] charArray = String.valueOf(number).toCharArray();
-        int[] digitArray = new int[charArray.length];
-        int squaredDigitSum = 0;
-
-        for (int i = 0; i < charArray.length; i++) {
-            digitArray[i] = Character.getNumericValue(charArray[i]);
-            digitArray[i] *= digitArray[i];
-            squaredDigitSum += digitArray[i];
-        }
-
-        return squaredDigitSum;
+        return String.valueOf(number)
+                .chars()
+                .mapToObj(character -> (char) character)
+                .map(Character::getNumericValue)
+                .map(digit -> (int) Math.pow(digit, 2))
+                .reduce(Integer::sum)
+                .orElse(-1);
     }
 }
