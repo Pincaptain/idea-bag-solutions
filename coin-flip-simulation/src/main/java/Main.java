@@ -1,4 +1,3 @@
-import models.CoinFlipSimulation;
 import services.CoinFlipSimulationService;
 import services.ICoinFlipSimulationService;
 

@@ -9,14 +9,6 @@ public class CoinFlipSimulation {
         tails = 0;
     }
 
-    public int getHeads() {
-        return heads;
-    }
-
-    public int getTails() {
-        return tails;
-    }
-
     public int getTotal() {
         return heads + tails;
     }
