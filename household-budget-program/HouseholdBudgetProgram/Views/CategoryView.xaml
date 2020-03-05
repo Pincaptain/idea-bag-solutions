@@ -1,0 +1,50 @@
+﻿<Window x:Class="HouseholdBudgetProgram.Views.CategoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HouseholdBudgetProgram.Views"
+        mc:Ignorable="d"
+        Title="Household Budget Program" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Row="0">
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Content="New Budget" />
+                    <Button Content="Open Budget" />
+                    <Button Content="Save Budget" />
+                </ToolBar>
+                <ToolBar Band="2">
+                    <Button Content="Add Category" />
+                    <Button Content="Remove Category" />
+                    <Button Content="Add Product" />
+                    <Button Content="Remove Product" />
+                </ToolBar>
+            </ToolBarTray>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <ListView BorderThickness="0" Grid.Row="1" Grid.Column="0" 
+                      x:Name="Categories" 
+                      SelectedItem="{Binding Path=SelectedCategory, Mode=OneWayToSource}"
+                      DisplayMemberPath="Description" />
+            <ListView BorderThickness="0" Grid.Row="1" Grid.Column="1" 
+                      x:Name="Products" 
+                      SelectedItem="{Binding Path=SelectedProduct, Mode=OneWayToSource}" 
+                      DisplayMemberPath="Description" />
+        </Grid>
+    </Grid>
+</Window>

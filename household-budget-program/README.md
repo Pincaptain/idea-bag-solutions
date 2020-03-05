@@ -1,0 +1,3 @@
+### Household Budget Program
+Create a full GUI program that allows the user to enter in and setup a household
+budget. They can enter in unlimited number of budget categories like Utilities, Travel Expenses,or Child Care. Then let the user enter in X number of sub-items for each of these categories listing their monthly expenses along with any income items. Have the program keep track of their expenses and their cash flow. This program should let the user know if they are overspending or how much they are saving for the month or year.
