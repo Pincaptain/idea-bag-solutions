@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HouseholdBudgetProgram.Views"
+        xmlns:converters="clr-namespace:HouseholdBudgetProgram.Converters"
         mc:Ignorable="d"
         Title="Household Budget Program" Height="450" Width="800">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -29,7 +34,23 @@
                 </ToolBar>
             </ToolBarTray>
         </DockPanel>
-        <Grid Grid.Row="1">
+        <DockPanel Grid.Row="1">
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <TextBlock x:Name="Budget_Name" Margin="0 0 10 0" />
+                    <TextBlock Text="Budget: " />
+                    <TextBlock x:Name="Budget_Budget" Margin="0 0 5 0" />
+                    <TextBlock x:Name="Budget_Currency" Margin="0 0 10 0" />
+                    <TextBlock Text="Current Budget: " />
+                    <TextBlock x:Name="Budget_CurrentBudget" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding Path=Budget.Currency, Mode=OneWay}" Margin="0 0 10 0" />
+                    <TextBlock Text="Negative Amount: " Visibility="{Binding Path=Budget.IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <TextBlock Text="{Binding Path=Budget.NegativeAmount, Mode=OneWay}" Visibility="{Binding Path=Budget.IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding Path=Budget.Currency, Mode=OneWay}" Visibility="{Binding Path=Budget.IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                </ToolBar>
+            </ToolBarTray>
+        </DockPanel>
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>

@@ -11,6 +11,21 @@ namespace HouseholdBudgetProgram.ViewModels
 {
     class CategoryViewModel : BaseViewModel
     {
+		#region Properties
+		private BudgetModel budget;
+
+		public BudgetModel Budget
+		{
+			get => budget;
+			set
+			{
+				budget = value;
+				Categories = Budget.Categories;
+
+				NotifyOfPropertyChange(() => Budget);
+			}
+		}
+
 		private BindableCollection<CategoryModel> categories;
 
 		public BindableCollection<CategoryModel> Categories
@@ -63,29 +78,19 @@ namespace HouseholdBudgetProgram.ViewModels
 				NotifyOfPropertyChange(() => SelectedProduct);
 			}
 		}
+        #endregion
 
-		private BudgetModel budget;
-
-		public BudgetModel Budget
-		{
-			get => budget;
-			set
-			{
-				budget = value;
-				Categories = Budget.Categories;
-
-				NotifyOfPropertyChange(() => Budget);
-			}
-		}
-
-		public CategoryViewModel()
+        #region Constructor
+        public CategoryViewModel()
 		{
 			LoadProducts();
 			LoadCategories();
 			LoadBudget();
 		}
+        #endregion
 
-		private void LoadBudget()
+        #region Initializers
+        private void LoadBudget()
 		{
 			BindableCollection<ProductModel> tools = new BindableCollection<ProductModel>
 			{
@@ -111,9 +116,10 @@ namespace HouseholdBudgetProgram.ViewModels
 			};
 
 			BudgetModel budget = BudgetModel.Instance;
-			Console.WriteLine(budget.Categories.Count);
 
 			budget.Categories = categories;
+			budget.Budget = 500;
+			budget.Name = "Borjan's Budget Plan";
 
 			Budget = budget;
 		}
@@ -131,5 +137,6 @@ namespace HouseholdBudgetProgram.ViewModels
 
 			Products = products;
 		}
-	}
+        #endregion
+    }
 }
