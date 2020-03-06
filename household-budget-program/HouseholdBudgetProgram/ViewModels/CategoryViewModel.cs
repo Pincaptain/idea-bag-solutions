@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using HouseholdBudgetProgram.Models;
 using HouseholdBudgetProgram.ViewModels.Base;
 
@@ -26,7 +21,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			}
 		}
 
-		private BindableCollection<CategoryModel> categories;
+		private BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
 
 		public BindableCollection<CategoryModel> Categories
 		{
@@ -53,7 +48,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			}
 		}
 
-		private BindableCollection<ProductModel> products;
+		private BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
 
 		public BindableCollection<ProductModel> Products
 		{
@@ -82,9 +77,7 @@ namespace HouseholdBudgetProgram.ViewModels
 
         #region Constructor
         public CategoryViewModel()
-		{
-			LoadProducts();
-			LoadCategories();
+		{ 
 			LoadBudget();
 		}
         #endregion
@@ -92,50 +85,43 @@ namespace HouseholdBudgetProgram.ViewModels
         #region Initializers
         private void LoadBudget()
 		{
-			BindableCollection<ProductModel> tools = new BindableCollection<ProductModel>
+			BudgetModel budget = new BudgetModel
 			{
-				new ProductModel { Name = "Hammer", Price = 10.0f },
-				new ProductModel { Name = "Screwdriver", Price = 20.0f }
-			};
-
-			BindableCollection<ProductModel> furniture = new BindableCollection<ProductModel>()
-			{
-				new ProductModel { Name = "Sofa", Price = 50.0f }
-			};
-
-			BindableCollection<ProductModel> toys = new BindableCollection<ProductModel>()
-			{
-				new ProductModel { Name = "Dragon", Price = 25.0f }
+				Budget = 500,
+				Name = "Borjan's Budget Plan",
+				Currency = "eur"
 			};
 
 			BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>
 			{
-				new CategoryModel { Name = "Tools", Products = tools },
-				new CategoryModel { Name = "Furniture", Products = furniture },
-				new CategoryModel { Name = "Toys", Products = toys }
+				new CategoryModel(budget) { Name = "Tools" },
+				new CategoryModel(budget) { Name = "Furniture" },
+				new CategoryModel(budget) { Name = "Toys" }
 			};
 
-			BudgetModel budget = BudgetModel.Instance;
+			BindableCollection<ProductModel> tools = new BindableCollection<ProductModel>
+			{
+				new ProductModel(categories[0]) { Name = "Hammer", Price = 10.0f },
+				new ProductModel(categories[0]) { Name = "Screwdriver", Price = 20.0f }
+			};
+
+			BindableCollection<ProductModel> furniture = new BindableCollection<ProductModel>()
+			{
+				new ProductModel(categories[1]) { Name = "Sofa", Price = 50.0f }
+			};
+
+			BindableCollection<ProductModel> toys = new BindableCollection<ProductModel>()
+			{
+				new ProductModel(categories[2]) { Name = "Dragon", Price = 25.0f }
+			};
+
+			categories[0].Products = tools;
+			categories[1].Products = furniture;
+			categories[2].Products = toys;
 
 			budget.Categories = categories;
-			budget.Budget = 500;
-			budget.Name = "Borjan's Budget Plan";
 
 			Budget = budget;
-		}
-
-		private void LoadCategories()
-		{
-			BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
-
-			Categories = categories;
-		}
-
-		private void LoadProducts()
-		{
-			BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
-
-			Products = products;
 		}
         #endregion
     }

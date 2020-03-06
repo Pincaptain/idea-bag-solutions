@@ -2,7 +2,5 @@
 
 namespace HouseholdBudgetProgram.ViewModels.Base
 {
-    class BaseViewModel : Screen
-    {
-    }
+    class BaseViewModel : Screen { }
 }

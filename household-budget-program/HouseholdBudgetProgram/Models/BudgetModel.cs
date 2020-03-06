@@ -1,23 +1,14 @@
 ﻿using Caliburn.Micro;
 using HouseholdBudgetProgram.Models.ComponentModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseholdBudgetProgram.Models
 {
-    sealed class BudgetModel : Observable
+    class BudgetModel : Observable
     {
-		private static readonly Lazy<BudgetModel> lazy = new Lazy<BudgetModel>(() => new BudgetModel());
-
-		public static BudgetModel Instance
-		{
-			get => lazy.Value;
-		}
-
-		private string name;
+        #region Properties
+        private string name;
 
 		public string Name
 		{
@@ -65,7 +56,7 @@ namespace HouseholdBudgetProgram.Models
 			}
 		}
 
-		private BindableCollection<CategoryModel> categories;
+		private BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
 
 		public BindableCollection<CategoryModel> Categories
 		{
@@ -97,17 +88,6 @@ namespace HouseholdBudgetProgram.Models
 		{
 			get => IsNegative ? Math.Abs(CurrentBudget) : 0;
 		}
-
-		private BudgetModel()
-		{
-			LoadCategories();
-		}
-
-		private void LoadCategories()
-		{
-			BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
-
-			Categories = categories;
-		}
-	}
+        #endregion
+    }
 }

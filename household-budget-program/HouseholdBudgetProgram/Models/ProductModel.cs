@@ -1,15 +1,11 @@
 ﻿using HouseholdBudgetProgram.Models.ComponentModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseholdBudgetProgram.Models
 {
     class ProductModel : Observable
     {
-		private string name;
+        #region Properties
+        private string name;
 
 		public string Name
 		{
@@ -41,9 +37,19 @@ namespace HouseholdBudgetProgram.Models
 			}
 		}
 
+		public CategoryModel Category { get; }
+
 		public string Description
 		{
-			get => $"{Name}: {Price} {BudgetModel.Instance.Currency}";
+			get => $"{Name}: {Price} {Category.Budget.Currency}";
 		}
-	}
+        #endregion
+
+        #region Constructor
+        public ProductModel(CategoryModel category)
+		{
+			Category = category;
+		}
+        #endregion
+    }
 }

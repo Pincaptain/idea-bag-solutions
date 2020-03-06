@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Caliburn.Micro;
 using HouseholdBudgetProgram.Models.ComponentModels;
 
@@ -10,7 +6,8 @@ namespace HouseholdBudgetProgram.Models
 {
     class CategoryModel : Observable
     {
-		private string name;
+        #region Properties
+        private string name;
 
 		public string Name
 		{
@@ -26,7 +23,9 @@ namespace HouseholdBudgetProgram.Models
 			}
 		}
 
-		private BindableCollection<ProductModel> products;
+        public BudgetModel Budget { get; }
+
+        private BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
 
 		public BindableCollection<ProductModel> Products
 		{
@@ -48,19 +47,15 @@ namespace HouseholdBudgetProgram.Models
 
 		public string Description
 		{
-			get => $"{Name}: {ProductsPrice} {BudgetModel.Instance.Currency}";
+			get => $"{Name}: {ProductsPrice} {Budget.Currency}";
 		}
+        #endregion
 
-		public CategoryModel()
+        #region Constructor
+        public CategoryModel(BudgetModel budget)
 		{
-			LoadProducts();
+			Budget = budget;
 		}
-
-		private void LoadProducts()
-		{
-			BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
-
-			Products = products;
-		}
-	}
+        #endregion
+    }
 }
