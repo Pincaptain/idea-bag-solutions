@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HouseholdBudgetProgram.Views
 {
     /// <summary>
-    /// Interaction logic for CategoryView.xaml
+    /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class CategoryView : UserControl
+    public partial class ProductView : UserControl
     {
-        public CategoryView()
+        public ProductView()
         {
             InitializeComponent();
         }

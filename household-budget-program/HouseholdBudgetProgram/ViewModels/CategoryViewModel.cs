@@ -1,114 +1,72 @@
 ﻿using Caliburn.Micro;
-using HouseholdBudgetProgram.Models;
 using HouseholdBudgetProgram.ViewModels.Base;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace HouseholdBudgetProgram.ViewModels
 {
     class CategoryViewModel : BaseViewModel
     {
-		private BudgetModel budget;
+		private string name;
 
-		public BudgetModel Budget
+		public string Name
 		{
-			get => budget;
+			get => name;
 			set
 			{
-				budget = value;
+				if (value != Name)
+				{
+					name = value;
 
-				NotifyOfPropertyChange(() => Budget);
+					NotifyOfPropertyChange(() => Name);
+				} 
 			}
 		}
 
-		private CategoryModel selectedCategory;
+		private BindableCollection<ProductViewModel> products;
 
-		public CategoryModel SelectedCategory
+		public BindableCollection<ProductViewModel> Products
 		{
-			get => selectedCategory;
+			get => products;
 			set
 			{
-				selectedCategory = value;
+				products = value;
 
-				NotifyOfPropertyChange(() => SelectedCategory);
+				NotifyOfPropertyChange(() => Products);
 			}
 		}
 
-		private ProductModel selectedProduct;
-
-		public ProductModel SelectedProduct
+		public double ProductsPrice
 		{
-			get => selectedProduct;
-			set
-			{
-				selectedProduct = value;
-
-				NotifyOfPropertyChange(() => SelectedProduct);
-			}
+			get => Products
+				.Select(product => product.Price)
+				.Sum();
 		}
 
-        public CategoryViewModel()
-		{ 
-			LoadBudget();
+		public string Description
+		{
+			get => $"{Name} {ProductsPrice} eur";
 		}
 
-        private void LoadBudget()
+		public CategoryViewModel()
 		{
-			BudgetModel budget = new BudgetModel
+			Name = "Tools";
+
+			Products = new BindableCollection<ProductViewModel>
 			{
-				Budget = 500,
-				Name = "Borjan's Budget Plan",
-				Currency = "eur"
+				new ProductViewModel("Hammer", 10),
+				new ProductViewModel("Screwdriver", 15),
+				new ProductViewModel("Bolt", 1)
 			};
-
-			BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>
-			{
-				new CategoryModel(budget) { Name = "Tools" },
-				new CategoryModel(budget) { Name = "Furniture" },
-				new CategoryModel(budget) { Name = "Toys" }
-			};
-
-			BindableCollection<ProductModel> tools = new BindableCollection<ProductModel>
-			{
-				new ProductModel(categories[0]) { Name = "Hammer", Price = 10.0f },
-				new ProductModel(categories[0]) { Name = "Screwdriver", Price = 20.0f }
-			};
-
-			BindableCollection<ProductModel> furniture = new BindableCollection<ProductModel>()
-			{
-				new ProductModel(categories[1]) { Name = "Sofa", Price = 50.0f }
-			};
-
-			BindableCollection<ProductModel> toys = new BindableCollection<ProductModel>()
-			{
-				new ProductModel(categories[2]) { Name = "Dragon", Price = 25.0f }
-			};
-
-			categories[0].Products = tools;
-			categories[1].Products = furniture;
-			categories[2].Products = toys;
-
-			budget.Categories = categories;
-
-			Budget = budget;
+			Products.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => NotifyOfPropertyChange(() => ProductsPrice);
 		}
 
-		public void AddCategory()
+		public CategoryViewModel(string name)
 		{
+			Name = name;
 
+			Products = new BindableCollection<ProductViewModel>();
+			Products.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => NotifyOfPropertyChange(() => ProductsPrice);
 		}
-
-		public void RemoveCategory()
-		{
-			Budget.Categories.Remove(SelectedCategory);
-		}
-
-		public void AddProduct()
-		{
-
-		}
-
-		public void RemoveProduct()
-		{
-			SelectedCategory.Products.Remove(SelectedProduct);
-		}
-    }
+	}
 }

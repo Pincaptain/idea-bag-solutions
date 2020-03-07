@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HouseholdBudgetProgram.Views
 {
     /// <summary>
-    /// Interaction logic for CategoryView.xaml
+    /// Interaction logic for BudgetView.xaml
     /// </summary>
-    public partial class CategoryView : UserControl
+    public partial class BudgetView : Window
     {
-        public CategoryView()
+        public BudgetView()
         {
             InitializeComponent();
         }

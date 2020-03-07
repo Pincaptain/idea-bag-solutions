@@ -13,7 +13,7 @@ namespace HouseholdBudgetProgram
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<CategoryViewModel>();
+            DisplayRootViewFor<BudgetViewModel>();
         }
     }
 }
