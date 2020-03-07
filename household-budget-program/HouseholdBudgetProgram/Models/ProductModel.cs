@@ -4,7 +4,6 @@ namespace HouseholdBudgetProgram.Models
 {
     class ProductModel : Observable
     {
-        #region Properties
         private string name;
 
 		public string Name
@@ -43,13 +42,10 @@ namespace HouseholdBudgetProgram.Models
 		{
 			get => $"{Name}: {Price} {Category.Budget.Currency}";
 		}
-        #endregion
 
-        #region Constructor
         public ProductModel(CategoryModel category)
 		{
 			Category = category;
 		}
-        #endregion
     }
 }

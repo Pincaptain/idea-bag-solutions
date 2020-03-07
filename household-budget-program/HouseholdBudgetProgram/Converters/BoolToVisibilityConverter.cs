@@ -5,7 +5,6 @@ using System.Windows.Data;
 
 namespace HouseholdBudgetProgram.Converters
 {
-    #region Methods
     public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -38,5 +37,4 @@ namespace HouseholdBudgetProgram.Converters
             return false;
         }
     }
-    #endregion
 }

@@ -1,13 +1,13 @@
 ﻿using Caliburn.Micro;
 using HouseholdBudgetProgram.Models.ComponentModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace HouseholdBudgetProgram.Models
 {
     class BudgetModel : Observable
-    {
-        #region Properties
+	{
         private string name;
 
 		public string Name
@@ -56,9 +56,9 @@ namespace HouseholdBudgetProgram.Models
 			}
 		}
 
-		private BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
+		private ObservableCollection<CategoryModel> categories = new ObservableCollection<CategoryModel>();
 
-		public BindableCollection<CategoryModel> Categories
+		public ObservableCollection<CategoryModel> Categories
 		{
 			get => categories;
 			set
@@ -66,6 +66,7 @@ namespace HouseholdBudgetProgram.Models
 				categories = value;
 
 				OnPropertyChanged(nameof(Categories));
+				OnPropertyChanged(nameof(CurrentBudget));
 			}
 		}
 
@@ -88,6 +89,5 @@ namespace HouseholdBudgetProgram.Models
 		{
 			get => IsNegative ? Math.Abs(CurrentBudget) : 0;
 		}
-        #endregion
     }
 }

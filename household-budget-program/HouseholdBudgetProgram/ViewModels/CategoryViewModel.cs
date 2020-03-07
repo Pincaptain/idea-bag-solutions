@@ -6,7 +6,6 @@ namespace HouseholdBudgetProgram.ViewModels
 {
     class CategoryViewModel : BaseViewModel
     {
-		#region Properties
 		private BudgetModel budget;
 
 		public BudgetModel Budget
@@ -15,22 +14,8 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				budget = value;
-				Categories = Budget.Categories;
 
 				NotifyOfPropertyChange(() => Budget);
-			}
-		}
-
-		private BindableCollection<CategoryModel> categories = new BindableCollection<CategoryModel>();
-
-		public BindableCollection<CategoryModel> Categories
-		{
-			get => categories;
-			set
-			{
-				categories = value;
-
-				NotifyOfPropertyChange(() => Categories);
 			}
 		}
 
@@ -42,22 +27,8 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				selectedCategory = value;
-				Products = SelectedCategory?.Products;
 
 				NotifyOfPropertyChange(() => SelectedCategory);
-			}
-		}
-
-		private BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
-
-		public BindableCollection<ProductModel> Products
-		{
-			get => products;
-			set
-			{
-				products = value;
-
-				NotifyOfPropertyChange(() => Products);
 			}
 		}
 
@@ -73,16 +44,12 @@ namespace HouseholdBudgetProgram.ViewModels
 				NotifyOfPropertyChange(() => SelectedProduct);
 			}
 		}
-        #endregion
 
-        #region Constructor
         public CategoryViewModel()
 		{ 
 			LoadBudget();
 		}
-        #endregion
 
-        #region Initializers
         private void LoadBudget()
 		{
 			BudgetModel budget = new BudgetModel
@@ -123,6 +90,25 @@ namespace HouseholdBudgetProgram.ViewModels
 
 			Budget = budget;
 		}
-        #endregion
+
+		public void AddCategory()
+		{
+
+		}
+
+		public void RemoveCategory()
+		{
+			Budget.Categories.Remove(SelectedCategory);
+		}
+
+		public void AddProduct()
+		{
+
+		}
+
+		public void RemoveProduct()
+		{
+			SelectedCategory.Products.Remove(SelectedProduct);
+		}
     }
 }

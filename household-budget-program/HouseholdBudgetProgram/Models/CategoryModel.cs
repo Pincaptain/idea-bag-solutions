@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Caliburn.Micro;
 using HouseholdBudgetProgram.Models.ComponentModels;
 
@@ -6,7 +7,6 @@ namespace HouseholdBudgetProgram.Models
 {
     class CategoryModel : Observable
     {
-        #region Properties
         private string name;
 
 		public string Name
@@ -25,9 +25,9 @@ namespace HouseholdBudgetProgram.Models
 
         public BudgetModel Budget { get; }
 
-        private BindableCollection<ProductModel> products = new BindableCollection<ProductModel>();
+        private ObservableCollection<ProductModel> products = new ObservableCollection<ProductModel>();
 
-		public BindableCollection<ProductModel> Products
+		public ObservableCollection<ProductModel> Products
 		{
 			get => products;
 			set
@@ -49,13 +49,10 @@ namespace HouseholdBudgetProgram.Models
 		{
 			get => $"{Name}: {ProductsPrice} {Budget.Currency}";
 		}
-        #endregion
 
-        #region Constructor
         public CategoryModel(BudgetModel budget)
 		{
 			Budget = budget;
 		}
-        #endregion
     }
 }

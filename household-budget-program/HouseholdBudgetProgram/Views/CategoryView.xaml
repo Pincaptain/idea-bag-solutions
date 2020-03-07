@@ -27,10 +27,10 @@
                     <Button Content="Save Budget" />
                 </ToolBar>
                 <ToolBar Band="2">
-                    <Button Content="Add Category" />
-                    <Button Content="Remove Category" />
-                    <Button Content="Add Product" />
-                    <Button Content="Remove Product" />
+                    <Button x:Name="AddCategory" Content="Add Category" />
+                    <Button x:Name="RemoveCategory" Content="Remove Category" />
+                    <Button x:Name="AddProduct" Content="Add Product" />
+                    <Button x:Name="RemoveProduct" Content="Remove Product" />
                 </ToolBar>
             </ToolBarTray>
         </DockPanel>
@@ -59,12 +59,12 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <ListView BorderThickness="0" Grid.Row="1" Grid.Column="0" 
-                      x:Name="Categories" 
+                      ItemsSource="{Binding Path=Budget.Categories, Mode=OneWay}"
                       SelectedItem="{Binding Path=SelectedCategory, Mode=OneWayToSource}"
                       DisplayMemberPath="Description" />
             <ListView BorderThickness="0" Grid.Row="1" Grid.Column="1" 
-                      x:Name="Products" 
-                      SelectedItem="{Binding Path=SelectedProduct, Mode=OneWayToSource}" 
+                      ItemsSource="{Binding Path=SelectedCategory.Products, Mode=OneWay}"
+                      SelectedItem="{Binding Path=SelectedProduct, Mode=OneWayToSource}"
                       DisplayMemberPath="Description" />
         </Grid>
     </Grid>
