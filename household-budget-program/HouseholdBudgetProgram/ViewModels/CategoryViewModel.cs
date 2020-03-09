@@ -14,12 +14,9 @@ namespace HouseholdBudgetProgram.ViewModels
 			get => name;
 			set
 			{
-				if (value != Name)
-				{
-					name = value;
+				name = value;
 
-					NotifyOfPropertyChange(() => Name);
-				} 
+				NotifyOfPropertyChange(() => Name);
 			}
 		}
 
@@ -43,18 +40,13 @@ namespace HouseholdBudgetProgram.ViewModels
 				.Sum();
 		}
 
-		public string Description
-		{
-			get => $"{Name} {ProductsPrice} eur";
-		}
-
 		public CategoryViewModel()
 		{
 			Name = "Tools";
 
 			Products = new BindableCollection<ProductViewModel>
 			{
-				new ProductViewModel("Hammer", 10),
+				new ProductViewModel("Hammer", 5500),
 				new ProductViewModel("Screwdriver", 15),
 				new ProductViewModel("Bolt", 1)
 			};

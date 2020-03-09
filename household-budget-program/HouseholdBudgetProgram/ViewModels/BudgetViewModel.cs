@@ -8,6 +8,15 @@ namespace HouseholdBudgetProgram.ViewModels
 {
     class BudgetViewModel : BaseViewModel
     {
+		private int counter;
+
+		public int Counter
+		{
+			get { return counter; }
+			set { counter = value; NotifyOfPropertyChange(() => Counter); }
+		}
+
+
 		private BindableCollection<CategoryViewModel> categories;
 
 		public BindableCollection<CategoryViewModel> Categories
@@ -21,6 +30,52 @@ namespace HouseholdBudgetProgram.ViewModels
 			}
 		}
 
+		private CategoryViewModel selectedCategory;
+
+		public CategoryViewModel SelectedCategory
+		{
+			get => selectedCategory;
+			set
+			{
+				selectedCategory = value;
+
+				Products = SelectedCategory?.Products;
+				if (Products != null)
+				{
+					Products.CollectionChanged += OnProductsChanged;
+				}
+
+				NotifyOfPropertyChange(() => SelectedCategory);
+			}
+		}
+
+		private BindableCollection<ProductViewModel> products;
+
+		public BindableCollection<ProductViewModel> Products
+		{
+			get => products;
+			set
+			{
+				products = value;
+
+				NotifyOfPropertyChange(() => Products);
+			}
+		}
+
+		private ProductViewModel selectedProduct;
+
+		public ProductViewModel SelectedProduct
+		{
+			get => selectedProduct;
+			set
+			{
+				selectedProduct = value;
+
+				NotifyOfPropertyChange(() => SelectedProduct);
+			}
+		}
+
+
 		private double budget;
 
 		public double Budget
@@ -28,12 +83,9 @@ namespace HouseholdBudgetProgram.ViewModels
 			get => budget;
 			set
 			{
-				if (value != budget)
-				{
-					budget = value;
+				budget = value;
 
-					NotifyOfPropertyChange(() => Budget);
-				}
+				NotifyOfPropertyChange(() => Budget);
 			}
 		}
 
@@ -67,6 +119,9 @@ namespace HouseholdBudgetProgram.ViewModels
 			};
 			Categories.CollectionChanged += OnCategoriesChanged;
 
+			Products = new BindableCollection<ProductViewModel>();
+			Products.CollectionChanged += OnProductsChanged;
+
 			Budget = 500;
 		}
 
@@ -76,6 +131,24 @@ namespace HouseholdBudgetProgram.ViewModels
 			NotifyOfPropertyChange(() => Balance);
 			NotifyOfPropertyChange(() => IsNegative);
 			NotifyOfPropertyChange(() => NegativeAmount);
+		}
+
+		private void OnProductsChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			NotifyOfPropertyChange(() => Spendings);
+			NotifyOfPropertyChange(() => Balance);
+			NotifyOfPropertyChange(() => IsNegative);
+			NotifyOfPropertyChange(() => NegativeAmount);
+		}
+
+		public void RemoveProduct()
+		{
+			Products?.Remove(SelectedProduct);
+		}
+
+		public void RemoveCategory()
+		{
+			Categories?.Remove(SelectedCategory);
 		}
 	}
 }

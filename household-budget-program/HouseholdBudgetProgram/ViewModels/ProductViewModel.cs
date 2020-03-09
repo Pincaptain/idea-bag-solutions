@@ -11,13 +11,10 @@ namespace HouseholdBudgetProgram.ViewModels
             get => name;
             set
             {
-                if (value != Name)
-                {
-                    name = value;
+                name = value;
 
-                    NotifyOfPropertyChange(() => Name);
-                    NotifyOfPropertyChange(() => Description);
-                }
+                NotifyOfPropertyChange(() => Name);
+                NotifyOfPropertyChange(() => Description);
             }
         }
 
@@ -28,13 +25,10 @@ namespace HouseholdBudgetProgram.ViewModels
             get => price;
             set
             {
-                if (value != Price)
-                {
-                    price = value;
+                price = value;
 
-                    NotifyOfPropertyChange(() => Price);
-                    NotifyOfPropertyChange(() => Description);
-                }
+                NotifyOfPropertyChange(() => Price);
+                NotifyOfPropertyChange(() => Description);
             }
         }
 

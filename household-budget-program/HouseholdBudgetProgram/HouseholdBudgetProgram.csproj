@@ -72,10 +72,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Models\BudgetModel.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\ComponentModels\Observable.cs" />
-    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\BudgetViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />

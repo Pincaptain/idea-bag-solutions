@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:HouseholdBudgetProgram.Views"
         xmlns:views="clr-namespace:HouseholdBudgetProgram.Views"
         xmlns:viewmodels="clr-namespace:HouseholdBudgetProgram.ViewModels"
+        xmlns:converters="clr-namespace:HouseholdBudgetProgram.Converters"
         mc:Ignorable="d"
-        Title="BudgetView" Height="450" Width="800">
+        Title="Household Budget Program" Height="450" Width="800">
     <Window.Resources>
         <!-- Static Resources -->
         <DataTemplate x:Key="ProductDataTemplate" DataType="{x:Type viewmodels:ProductViewModel}">
@@ -17,6 +18,9 @@
         <DataTemplate x:Key="CategoryDataTemplate" DataType="{x:Type viewmodels:CategoryViewModel}">
             <views:CategoryView />
         </DataTemplate>
+        
+        <!-- Bool To Visibility Converter -->
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <!-- Grid Definitions -->
@@ -30,24 +34,89 @@
 
         <!-- Status Toolbar -->
         <DockPanel Grid.Row="0" Grid.Column="0">
-            <ToolBarTray DockPanel.Dock="Top">
-                <ToolBar>
-                    <TextBlock Text="Balance: " />
-                    <TextBlock Text="{Binding Path=Balance, Mode=OneWay}" />
-                    <TextBlock Text=" eur" />
-                </ToolBar>
-            </ToolBarTray>
+            <!-- Action Menu -->
+            <Menu DockPanel.Dock="Top" Background="AliceBlue">
+                <!-- Categories Actions -->
+                <MenuItem Header="Categories" Padding="5 2">
+                    <MenuItem x:Name="AddCategory" Header="Add"/>
+                    <MenuItem x:Name="RemoveCategory" Header="Remove"/>
+                </MenuItem>
+                
+                <!-- Products Actions -->
+                <MenuItem Header="Products" Padding="5 2">
+                    <MenuItem x:Name="AddProduct" Header="Add"/>
+                    <MenuItem x:Name="RemoveProduct" Header="Remove"/>
+                </MenuItem>
+            </Menu>
+            
+            <!-- Information Menu -->
+            <Menu DockPanel.Dock="Top" Background="AliceBlue">
+                <!-- Balance Menu Information -->
+                <MenuItem Header="Balance: "
+                          Margin="5 0 0 0" Padding="0 2"
+                          IsHitTestVisible="False" />
+                <MenuItem Header="{Binding Path=Balance, Mode=OneWay}"
+                          Padding="0 2"
+                          IsHitTestVisible="False" />
+                <MenuItem Header=" eur"
+                          Margin="0 0 10 0" Padding="0 2"
+                          IsHitTestVisible="False" />
+
+                <!-- Budget Menu Information -->
+                <MenuItem Header="Budget: "
+                          Padding="0 2"
+                          IsHitTestVisible="False" />
+                <MenuItem Header="{Binding Path=Budget, Mode=OneWay}"
+                          Padding="0 2"
+                          IsHitTestVisible="False" />
+                <MenuItem Header=" eur"
+                          Margin="0 0 10 0" Padding="0 2"
+                          IsHitTestVisible="False" />
+
+                <!-- Negative Amount Menu Information -->
+                <MenuItem Foreground="Red"
+                          Header="Negative Amount: "
+                          Padding="0 2"
+                          IsHitTestVisible="False"
+                          Visibility="{Binding Path=IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <MenuItem Foreground="Red"
+                          Header="{Binding Path=NegativeAmount, Mode=OneWay}"
+                          Padding="0 2"
+                          IsHitTestVisible="False"
+                          Visibility="{Binding Path=IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <MenuItem Foreground="Red"
+                          Header=" eur"
+                          Margin="0 0 10 0" Padding="0 2"
+                          IsHitTestVisible="False"
+                          Visibility="{Binding Path=IsNegative, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+            </Menu>
         </DockPanel>
 
-        <!-- Categories List -->
-        <ListView Grid.Row="1" Grid.Column="0"
-                  ItemsSource="{Binding Path=Categories, Mode=OneWay}"
-                  ItemTemplate="{StaticResource ResourceKey=CategoryDataTemplate}"
-                  BorderThickness="0" />
+        <Grid Grid.Row="1" Grid.Column="0">
+            <!-- Inner Grid Definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
 
-        <!-- Products List -->
-        <!-- <ListView ItemsSource="{Binding Path=Products, Mode=OneWay}"
-                  ItemTemplate="{StaticResource ResourceKey=ProductDataTemplate}"
-                  BorderThickness="0" /> -->
+            <!-- Categories List -->
+            <ListView Grid.Row="0" Grid.Column="0"
+                      ItemsSource="{Binding Path=Categories, Mode=OneWay}"
+                      ItemTemplate="{StaticResource ResourceKey=CategoryDataTemplate}"
+                      SelectedItem="{Binding Path=SelectedCategory, Mode=OneWayToSource}"
+                      BorderThickness="0" />
+
+            <!-- Products List -->
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <ListView 
+                      ItemsSource="{Binding Path=Products, Mode=OneWay}"
+                      ItemTemplate="{StaticResource ResourceKey=ProductDataTemplate}"
+                      SelectedItem="{Binding Path=SelectedProduct, Mode=OneWayToSource}"
+                      BorderThickness="0" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

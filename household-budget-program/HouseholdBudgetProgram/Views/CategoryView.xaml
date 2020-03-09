@@ -24,6 +24,6 @@
         </Grid.ColumnDefinitions>
 
         <!-- Category Details -->
-        <TextBlock Text="{Binding Path=Description, Mode=OneWay}" />
+        <TextBlock Text="{Binding Path=Name, Mode=OneWay}" />
     </Grid>
 </UserControl>
