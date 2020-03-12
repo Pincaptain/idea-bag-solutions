@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using HouseholdBudgetProgram.ViewModels.Base;
+using HouseholdBudgetProgram.Views;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,14 +9,7 @@ namespace HouseholdBudgetProgram.ViewModels
 {
     class BudgetViewModel : BaseViewModel
     {
-		private int counter;
-
-		public int Counter
-		{
-			get { return counter; }
-			set { counter = value; NotifyOfPropertyChange(() => Counter); }
-		}
-
+		private readonly IWindowManager windowManager = new WindowManager();
 
 		private BindableCollection<CategoryViewModel> categories;
 
@@ -141,14 +135,38 @@ namespace HouseholdBudgetProgram.ViewModels
 			NotifyOfPropertyChange(() => NegativeAmount);
 		}
 
-		public void RemoveProduct()
+		public void AddCategory()
 		{
-			Products?.Remove(SelectedProduct);
+			AddCategoryViewModel addCategory = new AddCategoryViewModel();
+
+			windowManager.ShowDialog(addCategory);
+
+			if (addCategory.IsSuccessful)
+			{
+				Categories.Add(new CategoryViewModel(addCategory.Name));
+			}
 		}
 
 		public void RemoveCategory()
 		{
 			Categories?.Remove(SelectedCategory);
+		}
+
+		public void AddProduct()
+		{
+			AddProductViewModel addProduct = new AddProductViewModel();
+
+			windowManager.ShowDialog(addProduct);
+
+			if (addProduct.IsSuccessful)
+			{
+				SelectedCategory.Products.Add(new ProductViewModel(addProduct.Name, addProduct.Price));
+			}
+		}
+
+		public void RemoveProduct()
+		{
+			Products?.Remove(SelectedProduct);
 		}
 	}
 }
