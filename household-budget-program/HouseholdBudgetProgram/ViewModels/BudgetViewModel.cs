@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using HouseholdBudgetProgram.ViewModels.Base;
-using HouseholdBudgetProgram.Views;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -80,6 +79,10 @@ namespace HouseholdBudgetProgram.ViewModels
 				budget = value;
 
 				NotifyOfPropertyChange(() => Budget);
+				NotifyOfPropertyChange(() => Spendings);
+				NotifyOfPropertyChange(() => Balance);
+				NotifyOfPropertyChange(() => IsNegative);
+				NotifyOfPropertyChange(() => NegativeAmount);
 			}
 		}
 
@@ -133,6 +136,18 @@ namespace HouseholdBudgetProgram.ViewModels
 			NotifyOfPropertyChange(() => Balance);
 			NotifyOfPropertyChange(() => IsNegative);
 			NotifyOfPropertyChange(() => NegativeAmount);
+		}
+
+		public void NewBudget()
+		{
+			NewBudgetViewModel newBudget = new NewBudgetViewModel();
+
+			windowManager.ShowDialog(newBudget);
+
+			if (newBudget.IsSuccessful)
+			{
+				Budget = newBudget.Budget;
+			}
 		}
 
 		public void AddCategory()

@@ -1,12 +1,16 @@
-﻿<Window x:Class="HouseholdBudgetProgram.Views.AddProductView"
+﻿<Window x:Class="HouseholdBudgetProgram.Views.NewBudgetView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Add Product" Height="250" Width="400">
+        Title="New Budget" Height="200" Width="400">
     <Grid>
-        <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="207*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="20" Grid.ColumnSpan="2">
             <!-- Grid Definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
@@ -15,12 +19,10 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Add Product Form -->
+            <!-- New Budget Form -->
             <Grid Grid.Row="0" Grid.Column="0">
-                <!-- Add Product Form Grid Definitions -->
+                <!-- New Budget Form Grid Definitions -->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -29,28 +31,18 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Product Name Label -->
+                <!-- Budget Label -->
                 <TextBlock Grid.Row="0" Grid.Column="0"
-                           Text="Product" />
+                       Text="Budget" />
 
-                <!-- Product Name Input -->
+                <!-- Budget Input -->
                 <TextBox Grid.Row="1" Grid.Column="0"
-                         Margin="0 2 0 0" Padding="2"
-                         x:Name="Name" />
-
-                <!-- Product Price Label -->
-                <TextBlock Grid.Row="2" Grid.Column="0"
-                           Margin="0 10 0 0"
-                           Text="Price" />
-
-                <!-- Product Price Input -->
-                <TextBox Grid.Row="3" Grid.Column="0"
-                         Margin="0 2 0 0" Padding="2"
-                         x:Name="Price" />
+                     Margin="0 2 0 0" Padding="2"
+                     x:Name="Budget" />
 
                 <!-- Form Actions Grid -->
-                <Grid Grid.Row="4" Grid.Column="0"
-                      Margin="0 10 0 0">
+                <Grid Grid.Row="2" Grid.Column="0"
+                  Margin="0 10 0 0">
                     <!-- Form Actions Grid Definitions -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -60,15 +52,15 @@
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Create Button -->
+                    <!-- Confirm Button -->
                     <Button Grid.Row="0" Grid.Column="0"
-                            Margin="0 0 5 0" Padding="2"
-                            x:Name="Add" Content="Add" />
+                        Margin="0 0 5 0" Padding="2"
+                        x:Name="Confirm" Content="Confirm" />
 
                     <!-- Cancel Button -->
                     <Button Grid.Row="0" Grid.Column="1"
-                            Margin="5 0 0 0" Padding="2"
-                            x:Name="Cancel" Content="Cancel" />
+                        Margin="5 0 0 0" Padding="2"
+                        x:Name="Cancel" Content="Cancel" />
                 </Grid>
             </Grid>
         </Grid>

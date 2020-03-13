@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HouseholdBudgetProgram.Views"
         xmlns:views="clr-namespace:HouseholdBudgetProgram.Views"
         xmlns:viewmodels="clr-namespace:HouseholdBudgetProgram.ViewModels"
         xmlns:converters="clr-namespace:HouseholdBudgetProgram.Converters"
@@ -36,6 +35,13 @@
         <DockPanel Grid.Row="0" Grid.Column="0">
             <!-- Action Menu -->
             <Menu DockPanel.Dock="Top" Background="AliceBlue">
+                <!-- Budget Actions -->
+                <MenuItem Header="Budget" Padding="5 2">
+                    <MenuItem x:Name="NewBudget" Header="New" />
+                    <MenuItem x:Name="SaveBudget" Header="Save" />
+                    <MenuItem x:Name="OpenBudget" Header="Open" />
+                </MenuItem>
+                
                 <!-- Categories Actions -->
                 <MenuItem Header="Categories" Padding="5 2">
                     <MenuItem x:Name="AddCategory" Header="Add"/>

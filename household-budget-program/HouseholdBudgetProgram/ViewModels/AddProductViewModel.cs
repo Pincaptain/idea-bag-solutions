@@ -53,5 +53,12 @@ namespace HouseholdBudgetProgram.ViewModels
 
             TryClose();
         }
+
+        public AddProductViewModel()
+        {
+            Name = string.Empty;
+            Price = 0;
+            IsSuccessful = false;
+        }
     }
 }

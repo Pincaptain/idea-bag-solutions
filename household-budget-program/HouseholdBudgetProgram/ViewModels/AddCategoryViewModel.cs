@@ -34,5 +34,11 @@ namespace HouseholdBudgetProgram.ViewModels
 
             TryClose();
         }
+
+        public AddCategoryViewModel()
+        {
+            Name = string.Empty;
+            IsSuccessful = false;
+        }
     }
 }
