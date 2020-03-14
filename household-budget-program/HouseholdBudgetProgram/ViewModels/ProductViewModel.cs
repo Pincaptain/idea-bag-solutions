@@ -1,9 +1,12 @@
-﻿using HouseholdBudgetProgram.ViewModels.Base;
+﻿using HouseholdBudgetProgram.Models;
+using HouseholdBudgetProgram.ViewModels.Base;
 
 namespace HouseholdBudgetProgram.ViewModels
 {
     class ProductViewModel : BaseViewModel
     {
+		public ProductModel Product { get; set; }
+
 		private string name;
 
 		public string Name
@@ -12,6 +15,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				name = value;
+				Product.Name = value;
 
 				NotifyOfPropertyChange(() => Name);
 				NotifyOfPropertyChange(() => Description);
@@ -26,6 +30,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				price = value;
+				Product.Price = value;
 
 				NotifyOfPropertyChange(() => Price);
 				NotifyOfPropertyChange(() => Description);
@@ -40,10 +45,16 @@ namespace HouseholdBudgetProgram.ViewModels
 			}
 		}
 
-		public ProductViewModel() { }
+		public ProductViewModel()
+		{
+			Product = new ProductModel();
+			Name = string.Empty;
+			Price = 0;
+		}
 
         public ProductViewModel(string name, double price)
         {
+			Product = new ProductModel(name, price);
 			Name = name;
 			Price = price;
         }

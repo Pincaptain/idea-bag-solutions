@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
+using HouseholdBudgetProgram.Models;
 using HouseholdBudgetProgram.ViewModels.Base;
+using HouseholdBudgetProgram.Core.Serialization;
+using Microsoft.Win32;
 using System;
-using System.Collections.Specialized;
 using System.Linq;
 
 namespace HouseholdBudgetProgram.ViewModels
@@ -9,6 +11,8 @@ namespace HouseholdBudgetProgram.ViewModels
     class BudgetViewModel : BaseViewModel
     {
 		private readonly IWindowManager windowManager = new WindowManager();
+
+		public BudgetModel Budget { get; set; }
 
 		private BindableCollection<CategoryViewModel> categories;
 
@@ -18,8 +22,15 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				categories = value;
+				Budget.Categories = value
+					.Select(category => category.Category)
+					.ToList();
 
 				NotifyOfPropertyChange(() => Categories);
+				NotifyOfPropertyChange(() => Spendings);
+				NotifyOfPropertyChange(() => Balance);
+				NotifyOfPropertyChange(() => IsNegative);
+				NotifyOfPropertyChange(() => NegativeAmount);
 			}
 		}
 
@@ -31,12 +42,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				selectedCategory = value;
-
 				Products = SelectedCategory?.Products;
-				if (Products != null)
-				{
-					Products.CollectionChanged += OnProductsChanged;
-				}
 
 				NotifyOfPropertyChange(() => SelectedCategory);
 			}
@@ -52,6 +58,10 @@ namespace HouseholdBudgetProgram.ViewModels
 				products = value;
 
 				NotifyOfPropertyChange(() => Products);
+				NotifyOfPropertyChange(() => Spendings);
+				NotifyOfPropertyChange(() => Balance);
+				NotifyOfPropertyChange(() => IsNegative);
+				NotifyOfPropertyChange(() => NegativeAmount);
 			}
 		}
 
@@ -69,16 +79,17 @@ namespace HouseholdBudgetProgram.ViewModels
 		}
 
 
-		private double budget;
+		private double initialBudget;
 
-		public double Budget
+		public double InitialBudget
 		{
-			get => budget;
+			get => initialBudget;
 			set
 			{
-				budget = value;
+				initialBudget = value;
+				Budget.Budget = value;
 
-				NotifyOfPropertyChange(() => Budget);
+				NotifyOfPropertyChange(() => InitialBudget);
 				NotifyOfPropertyChange(() => Spendings);
 				NotifyOfPropertyChange(() => Balance);
 				NotifyOfPropertyChange(() => IsNegative);
@@ -95,7 +106,7 @@ namespace HouseholdBudgetProgram.ViewModels
 
 		public double Balance
 		{
-			get => Budget - Spendings;
+			get => InitialBudget - Spendings;
 		}
 
 		public bool IsNegative
@@ -110,32 +121,13 @@ namespace HouseholdBudgetProgram.ViewModels
 
 		public BudgetViewModel()
 		{
+			Budget = new BudgetModel();
 			Categories = new BindableCollection<CategoryViewModel>
 			{
 				new CategoryViewModel()
 			};
-			Categories.CollectionChanged += OnCategoriesChanged;
-
 			Products = new BindableCollection<ProductViewModel>();
-			Products.CollectionChanged += OnProductsChanged;
-
-			Budget = 500;
-		}
-
-		private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			NotifyOfPropertyChange(() => Spendings);
-			NotifyOfPropertyChange(() => Balance);
-			NotifyOfPropertyChange(() => IsNegative);
-			NotifyOfPropertyChange(() => NegativeAmount);
-		}
-
-		private void OnProductsChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			NotifyOfPropertyChange(() => Spendings);
-			NotifyOfPropertyChange(() => Balance);
-			NotifyOfPropertyChange(() => IsNegative);
-			NotifyOfPropertyChange(() => NegativeAmount);
+			InitialBudget = 500;
 		}
 
 		public void NewBudget()
@@ -146,7 +138,51 @@ namespace HouseholdBudgetProgram.ViewModels
 
 			if (newBudget.IsSuccessful)
 			{
-				Budget = newBudget.Budget;
+				InitialBudget = newBudget.Budget;
+				Categories = new BindableCollection<CategoryViewModel>();
+				SelectedCategory = null;
+				Products = new BindableCollection<ProductViewModel>();
+				SelectedProduct = null;
+			}
+		}
+
+		public void SaveBudget()
+		{
+			SaveFileDialog saveFile = new SaveFileDialog()
+			{
+				Filter = "HBP Files (*.hbp)|*.hbp"
+			};
+
+			bool isSuccessful = saveFile.ShowDialog() ?? false;
+
+			if (isSuccessful)
+			{
+				BinarySerialization binarySerialization = new BinarySerialization();
+
+				binarySerialization.Serialize(saveFile.FileName, Budget);
+			}
+		}
+
+		public void OpenBudget()
+		{
+			OpenFileDialog openFile = new OpenFileDialog()
+			{
+				Filter = "HBP Files (*.hbp)|*.hbp"
+			};
+
+			bool isSuccessful = openFile.ShowDialog() ?? false;
+
+			if (isSuccessful)
+			{
+				BinarySerialization binarySerialization = new BinarySerialization();
+				BudgetModel budget = (BudgetModel) binarySerialization.Deserialize(openFile.FileName);
+
+				Budget = budget;
+				InitialBudget = budget.Budget;
+				Categories = new BindableCollection<CategoryViewModel>(budget.Categories
+					.Select(category => new CategoryViewModel(category.Name, new BindableCollection<ProductViewModel>(category.Products
+					.Select(product => new ProductViewModel(product.Name, product.Price)))))
+					.ToList());
 			}
 		}
 
@@ -158,13 +194,22 @@ namespace HouseholdBudgetProgram.ViewModels
 
 			if (addCategory.IsSuccessful)
 			{
-				Categories.Add(new CategoryViewModel(addCategory.Name));
+				BindableCollection<CategoryViewModel> categories = new BindableCollection<CategoryViewModel>(Categories)
+				{
+					new CategoryViewModel(addCategory.Name)
+				};
+
+				Categories = categories;
 			}
 		}
 
 		public void RemoveCategory()
 		{
-			Categories?.Remove(SelectedCategory);
+			BindableCollection<CategoryViewModel> categories = new BindableCollection<CategoryViewModel>(Categories);
+
+			categories.Remove(SelectedCategory);
+
+			Categories = categories;
 		}
 
 		public void AddProduct()
@@ -175,13 +220,37 @@ namespace HouseholdBudgetProgram.ViewModels
 
 			if (addProduct.IsSuccessful)
 			{
-				SelectedCategory.Products.Add(new ProductViewModel(addProduct.Name, addProduct.Price));
+				CategoryViewModel selectedCategory = SelectedCategory;
+
+				selectedCategory?.Products.Add(new ProductViewModel(addProduct.Name, addProduct.Price));
+
+				SelectedCategory = selectedCategory;
+
+				BindableCollection<CategoryViewModel> categories = new BindableCollection<CategoryViewModel>(Categories);
+
+				categories
+					.First(category => category.Equals(SelectedCategory))
+					.Products = selectedCategory.Products;
+
+				Categories = categories;
 			}
 		}
 
 		public void RemoveProduct()
 		{
-			Products?.Remove(SelectedProduct);
+			CategoryViewModel selectedCategory = SelectedCategory;
+
+			selectedCategory?.Products.Remove(SelectedProduct);
+
+			SelectedCategory = selectedCategory;
+
+			BindableCollection<CategoryViewModel> categories = new BindableCollection<CategoryViewModel>(Categories);
+
+			categories
+				.First(category => category.Equals(SelectedCategory))
+				.Products = selectedCategory.Products;
+
+			Categories = categories;
 		}
 	}
 }

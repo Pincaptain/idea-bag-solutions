@@ -161,5 +161,12 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HouseholdBudgetProgram.Core\HouseholdBudgetProgram.Core.csproj">
+      <Project>{96d6b17d-a8c3-4f80-a1c2-4c8fe9a5ee02}</Project>
+      <Name>HouseholdBudgetProgram.Core</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
