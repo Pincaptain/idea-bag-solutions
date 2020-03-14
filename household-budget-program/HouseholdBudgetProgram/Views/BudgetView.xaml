@@ -72,7 +72,7 @@
                 <MenuItem Header="Budget: "
                           Padding="0 2"
                           IsHitTestVisible="False" />
-                <MenuItem Header="{Binding Path=Budget, Mode=OneWay}"
+                <MenuItem Header="{Binding Path=InitialBudget, Mode=OneWay}"
                           Padding="0 2"
                           IsHitTestVisible="False" />
                 <MenuItem Header=" eur"

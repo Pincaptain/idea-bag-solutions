@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using HouseholdBudgetProgram.Models;
 using HouseholdBudgetProgram.ViewModels.Base;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,6 +8,8 @@ namespace HouseholdBudgetProgram.ViewModels
 {
     class CategoryViewModel : BaseViewModel
     {
+		public CategoryModel Category { get; set; }
+
 		private string name;
 
 		public string Name
@@ -15,6 +18,7 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				name = value;
+				Category.Name = value;
 
 				NotifyOfPropertyChange(() => Name);
 			}
@@ -28,6 +32,9 @@ namespace HouseholdBudgetProgram.ViewModels
 			set
 			{
 				products = value;
+				Category.Products = value
+					.Select(product => product.Product)
+					.ToList();
 
 				NotifyOfPropertyChange(() => Products);
 			}
@@ -42,6 +49,7 @@ namespace HouseholdBudgetProgram.ViewModels
 
 		public CategoryViewModel()
 		{
+			Category = new CategoryModel();
 			Name = "Tools";
 
 			Products = new BindableCollection<ProductViewModel>
@@ -50,15 +58,30 @@ namespace HouseholdBudgetProgram.ViewModels
 				new ProductViewModel("Screwdriver", 15),
 				new ProductViewModel("Bolt", 1)
 			};
-			Products.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => NotifyOfPropertyChange(() => ProductsPrice);
+			Products.CollectionChanged += OnProductsChanged;
 		}
 
 		public CategoryViewModel(string name)
 		{
+			Category = new CategoryModel(name);
 			Name = name;
 
 			Products = new BindableCollection<ProductViewModel>();
-			Products.CollectionChanged += (object sender, NotifyCollectionChangedEventArgs e) => NotifyOfPropertyChange(() => ProductsPrice);
+			Products.CollectionChanged += OnProductsChanged;
+		}
+
+		public CategoryViewModel(string name, BindableCollection<ProductViewModel> products)
+		{
+			Category = new CategoryModel(name);
+			Name = name;
+
+			Products = products;
+			Products.CollectionChanged += OnProductsChanged;
+		}
+
+		private void OnProductsChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			NotifyOfPropertyChange(() => ProductsPrice);
 		}
 	}
 }
