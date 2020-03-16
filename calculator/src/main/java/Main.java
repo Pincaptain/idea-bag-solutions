@@ -11,15 +11,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Get root fxml view (stage)
         Parent root = FXMLLoader.load(getClass().getResource("fxml/calculator.fxml"));
-
-        // Create the primary scene
-        // Append a stylesheet file to it
         Scene primaryScene = new Scene(root);
 
-        // Update the window with a title and a scene
-        // Show the window after updating
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(primaryScene);
         primaryStage.show();
