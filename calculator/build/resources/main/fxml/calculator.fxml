@@ -40,7 +40,7 @@
                         <Font size="32.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" text="+" GridPane.columnIndex="3">
+                <Button mnemonicParsing="false" onAction="#onOperationClicked" prefHeight="90000.0" prefWidth="90000.0" text="+" GridPane.columnIndex="3">
                     <font>
                         <Font size="32.0" />
                     </font>
@@ -60,7 +60,7 @@
                         <Font size="32.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <Button mnemonicParsing="false" onAction="#onOperationClicked" prefHeight="90000.0" prefWidth="90000.0" text="-" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <font>
                         <Font size="32.0" />
                     </font>
@@ -80,19 +80,25 @@
                         <Font size="32.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                <Button mnemonicParsing="false" onAction="#onOperationClicked" prefHeight="90000.0" prefWidth="90000.0" text="*" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <font>
                         <Font size="32.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" onAction="#onClearClicked" prefHeight="90000.0" prefWidth="90000.0" text="C" GridPane.rowIndex="3">
+               <font>
+                  <Font size="32.0" />
+               </font></Button>
                 <Button mnemonicParsing="false" onAction="#onOperandClicked" prefHeight="90000.0" prefWidth="90000.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <font>
                         <Font size="32.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <Button mnemonicParsing="false" prefHeight="90000.0" prefWidth="90000.0" text="/" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <Button mnemonicParsing="false" onAction="#onRemoveClicked" prefHeight="90000.0" prefWidth="90000.0" text="CE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="32.0" />
+               </font></Button>
+                <Button mnemonicParsing="false" onAction="#onOperationClicked" prefHeight="90000.0" prefWidth="90000.0" text="/" GridPane.columnIndex="3" GridPane.rowIndex="3">
                     <font>
                         <Font size="32.0" />
                     </font>
