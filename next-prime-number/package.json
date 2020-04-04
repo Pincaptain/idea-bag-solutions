@@ -1,0 +1,14 @@
+{
+  "name": "next-prime-number",
+  "version": "1.0.0",
+  "description": "Develop a program that starting at any number the user inputs, generates the next prime number. Ask the user for confirmation to keep going, if it is granted print the next prime number again otherwise quit the program.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Borjan Gjorovski",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^13.11.0"
+  }
+}

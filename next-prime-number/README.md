@@ -1,0 +1,2 @@
+### Next Prime Number
+Develop a program that starting at any number the user inputs, generates the next prime number. Ask the user for confirmation to keep going, if it is granted print the next prime number again otherwise quit the program.
