@@ -13,23 +13,23 @@ ChangeReturnService::ChangeReturnService(float price, float payment) {
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "bugprone-narrowing-conversions"
-std::vector<std::pair<int, float> > ChangeReturnService::calculate() {
+std::vector<int> ChangeReturnService::calculate() {
     // List of pairs
     // First element in pairs is type
     // Second element is count
-    std::vector<std::pair<int, float>> change = std::vector<std::pair<int, float>>();
+    std::vector<int> change = std::vector<int>();
 
     // Amount to return
     int to_return = (payment - price) * 100;
 
     // Calculate the amount of coins
-    change.insert(change.end(), std::pair<int, int>(25, to_return / 25));
+    change.insert(change.end(), to_return / 25);
     to_return = to_return % 25;
-    change.insert(change.end(), std::pair<int, int>(25, to_return / 10));
+    change.insert(change.end(), to_return / 10);
     to_return = to_return % 10;
-    change.insert(change.end(), std::pair<int, int>(25, to_return / 5));
+    change.insert(change.end(), to_return / 5);
     to_return = to_return % 5;
-    change.insert(change.end(), std::pair<int, int>(25, to_return));
+    change.insert(change.end(), to_return);
 
     return change;
 }

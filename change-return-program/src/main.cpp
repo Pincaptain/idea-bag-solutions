@@ -20,10 +20,12 @@ int main(int count, char** args) {
     }
 
     auto service = new ChangeReturnService(price, payment);
-    std::cout << "Quarters: " << service->calculate()[0].second << std::endl;
-    std::cout << "Dimes: " << service->calculate()[1].second << std::endl;
-    std::cout << "Nickels: " << service->calculate()[2].second << std::endl;
-    std::cout << "Pennies: " << service->calculate()[3].second << std::endl;
+    std::vector<int> change = service->calculate();
+
+    std::cout << "Quarters: " << change[0] << std::endl;
+    std::cout << "Dimes: " << change[1] << std::endl;
+    std::cout << "Nickels: " << change[2] << std::endl;
+    std::cout << "Pennies: " << change[3] << std::endl;
 
     return 0;
 }

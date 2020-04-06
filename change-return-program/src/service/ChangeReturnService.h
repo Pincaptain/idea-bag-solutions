@@ -16,7 +16,7 @@ private:
 
 public:
     ChangeReturnService(float price, float payment);
-    std::vector<std::pair<int, float>> calculate();
+    std::vector<int> calculate();
 };
 
 
