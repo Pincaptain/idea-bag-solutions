@@ -12,7 +12,8 @@ function createWindow() {
             nodeIntegration: true,
         },
     });
-
+    
+    // TODO - Start localhost
     win.loadFile(path.join(__dirname, 'presentation', 'build', 'index.html'));
 }
 
@@ -22,6 +23,10 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
+});
+
+app.on('before-quit', () => {
+    // TODO - Terminate localhost
 });
 
 app.on('activate', () => {
