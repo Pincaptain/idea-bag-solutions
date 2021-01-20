@@ -18,7 +18,7 @@ enum UnitType {
     Yard,
     Foot,
     Inch,
-    NauticalMile,
+    NauticalMile
 }
 
 struct UnitConverter {}
