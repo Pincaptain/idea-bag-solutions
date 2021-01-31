@@ -1,0 +1,13 @@
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.exe
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.deps.json
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.runtimeconfig.json
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.runtimeconfig.dev.json
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.dll
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\bin\Debug\netcoreapp3.1\roman-number-generator.pdb
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.csprojAssemblyReference.cache
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.AssemblyInfoInputs.cache
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.AssemblyInfo.cs
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.csproj.CoreCompileInputs.cache
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.dll
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.pdb
+C:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\roman-number-generator\obj\Debug\netcoreapp3.1\roman-number-generator.genruntimeconfig.cache
