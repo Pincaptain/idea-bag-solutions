@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonianGravitySimulation.Presentation", "NewtonianGravitySimulation.Presentation\NewtonianGravitySimulation.Presentation.csproj", "{0BB7258B-9823-407F-BF2B-788C712F861B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonianGravitySimulation.Model", "NewtonianGravitySimulation.Model\NewtonianGravitySimulation.Model.csproj", "{8F2BAC13-A372-4A90-894D-1CA3FCD7BCAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonianGravitySimulation.Domain", "NewtonianGravitySimulation.Domain\NewtonianGravitySimulation.Domain.csproj", "{8C338371-0DE7-4F0F-BCF5-990980E4FB28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonianGravitySimulation.Test", "NewtonianGravitySimulation.Test\NewtonianGravitySimulation.Test.csproj", "{9C45075B-C152-4F9B-85C0-DBCDF51868A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BB7258B-9823-407F-BF2B-788C712F861B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB7258B-9823-407F-BF2B-788C712F861B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB7258B-9823-407F-BF2B-788C712F861B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB7258B-9823-407F-BF2B-788C712F861B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F2BAC13-A372-4A90-894D-1CA3FCD7BCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F2BAC13-A372-4A90-894D-1CA3FCD7BCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F2BAC13-A372-4A90-894D-1CA3FCD7BCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F2BAC13-A372-4A90-894D-1CA3FCD7BCAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C338371-0DE7-4F0F-BCF5-990980E4FB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C338371-0DE7-4F0F-BCF5-990980E4FB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C338371-0DE7-4F0F-BCF5-990980E4FB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C338371-0DE7-4F0F-BCF5-990980E4FB28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C45075B-C152-4F9B-85C0-DBCDF51868A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C45075B-C152-4F9B-85C0-DBCDF51868A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C45075B-C152-4F9B-85C0-DBCDF51868A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C45075B-C152-4F9B-85C0-DBCDF51868A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

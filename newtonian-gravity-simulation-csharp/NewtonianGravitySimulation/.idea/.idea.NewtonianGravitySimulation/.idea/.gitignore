@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.NewtonianGravitySimulation.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\newtonian-gravity-simulation-csharp\NewtonianGravitySimulation\.idea\.idea.NewtonianGravitySimulation\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
