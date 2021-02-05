@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/.idea.PascalsTriangle.iml
+/projectSettingsUpdater.xml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../:\Users\Borjan Gjorovski\Projects\Coding\Other\idea-bag-solutions\pascals-triangle\PascalsTriangle\.idea\.idea.PascalsTriangle\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
